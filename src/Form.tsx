@@ -21,7 +21,9 @@ const Form = ({
     setSearchInput(e.target.value)
   }
 
-  useEffect(() => {console.log('hi'), [searchInput]})
+  useEffect(() => {
+    updateSearchedGames(searchInput)
+  },[searchInput])
 
   return (
     <Container

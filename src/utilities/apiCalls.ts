@@ -3,7 +3,7 @@ export const fetchGames = async (searchInput: string) => {
     const response = await fetch(
       `https://api.boardgameatlas.com/api/search?name=${searchInput}&client_id=zuMwyCtcvF`
     )
-    return await response.json()
+    return response.json()
   } catch (error) {
     return error
   }
