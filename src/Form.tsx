@@ -1,14 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Container from "@mui/material/Container"
-import { TextField } from "@mui/material"
+import TextField from "@mui/material/TextField"
 import Slider from "@mui/material/Slider"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 
-const Form = () => {
-  const [searchInput, setSearchInput] = useState<string>('')
+const Form = ({
+  updateSearchedGames,
+}: {
+  updateSearchedGames: (searchInput: string) => void
+}) => {
+  const [searchInput, setSearchInput] = useState<string>("")
   const [rating, setRating] = useState<number>(0)
-
 
   const handleRatingChange = (e: any) => {
     setRating(e.target.value)
@@ -18,10 +21,45 @@ const Form = () => {
     setSearchInput(e.target.value)
   }
 
+  useEffect(() => {console.log('hi'), [searchInput]})
 
   return (
-    <Container sx={{ display: "flex", justifyContent: 'space-between', position: 'fixed', left: '0', top: '0', width: '100%', mt: 10}}>
-      <TextField sx={{ input: { color: 'white' } }} label="Search by name" variant="standard" color='secondary' onChange={(e => handleSearchInput(e))}/>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        position: "fixed",
+        left: "0",
+        top: "0",
+        width: "100%",
+        mt: 10,
+      }}
+    >
+      <TextField
+        sx={{
+          input: {
+            "&::placeholder": {
+              color: "white",
+            },
+            "&:hover": {
+              border: "white 1px solid",
+              borderRadius: "3px",
+              zIndex: 1,
+            },
+            "&:focus": {
+              border: "white 2px solid",
+              borderRadius: "3px",
+              zIndex: 1,
+            },
+            color: "white",
+            border: "white 1px solid",
+            borderRadius: "3px",
+          },
+        }}
+        placeholder="Search by name"
+        value={searchInput}
+        onChange={(e) => handleSearchInput(e)}
+      />
       <Box sx={{ width: 200 }}>
         <Typography sx={{ m: "0 0 2em 0" }}>User Rating</Typography>
         <Slider

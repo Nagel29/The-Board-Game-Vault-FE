@@ -1,16 +1,9 @@
-export const searchGames = async (searchInput: string) => {
+export const fetchGames = async (searchInput: string) => {
   try {
     const response = await fetch(
-      `https://api.boardgameatlas.com/api/search?name=${searchInput}&client_id=zuMwyCtcvF`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      `https://api.boardgameatlas.com/api/search?name=${searchInput}&client_id=zuMwyCtcvF`
     )
-
-    return response.json()
+    return await response.json()
   } catch (error) {
     return error
   }
