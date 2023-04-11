@@ -41,7 +41,7 @@ const Nav = () => {
     <AppBar position="fixed">
       <Container maxWidth="xl" disableGutters>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1, ml: 1.5 }} />
           <Typography
             variant="h6"
             noWrap
