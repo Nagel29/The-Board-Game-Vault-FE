@@ -1,4 +1,4 @@
-export const mechanics = [
+export const mechanicsList = [
   {
     id: "SWJGuaim9h",
     name: "AI enemies",
@@ -1121,7 +1121,7 @@ export const mechanics = [
   }
 ]
 
-export const categories = [
+export const categoriesList = [
   {
     id: "2bdFPJUvFo",
     name: "18XX",

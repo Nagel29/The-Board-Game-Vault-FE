@@ -7,7 +7,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select"
 import Checkbox from "@mui/material/Checkbox"
 import { useState } from "react"
 
-const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: string}[], name: string}) => {
+const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: string[], list:{id: string, name: string, url: string}[], name: string, handleChange: (event: any) => void}) => {
   // const ITEM_HEIGHT = 48
   // const ITEM_PADDING_TOP = 8
   // const MenuProps = {
@@ -19,15 +19,15 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
   //   },
   // }
 
-  const [filterSelections, setFilterSelections] = useState<string[]>([])
+  // const [filterSelections, setFilterSelections] = useState<string[]>([])
 
-  const handleChange = (event: SelectChangeEvent<typeof filterSelections>) => {
-    console.log(event.target)
-    setFilterSelections(
-      // On autofill we get a stringified value.
-      typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value
-    )
-  }
+  // const handleChange = (event: SelectChangeEvent<typeof filterSelections>) => {
+  //   console.log(event.target)
+  //   setFilterSelections(
+  //     // On autofill we get a stringified value.
+  //     typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value
+  //   )
+  // }
 
   return (
     <div>
@@ -37,7 +37,7 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={filterSelections}
+          value={filterState}
           onChange={handleChange}
           input={<OutlinedInput label={name} />}
           renderValue={(selected) => selected.join(", ")}
@@ -53,7 +53,7 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
         >
           {list.map((item) => (
             <MenuItem key={item.id} value={item.name}>
-              <Checkbox checked={filterSelections.indexOf(item.name) > -1} />
+              <Checkbox checked={filterState.indexOf(item.name) > -1} />
               <ListItemText primary={item.name} />
             </MenuItem>
           ))}

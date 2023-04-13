@@ -5,7 +5,8 @@ import Slider from "@mui/material/Slider"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import CheckedDropdown from "./CheckedDropdown"
-import { mechanics, categories } from './utilities/data'
+import { mechanicsList, categoriesList } from './utilities/data'
+import { SelectChangeEvent } from "@mui/material/Select"
 
 const Form = ({
   updateSearchedGames,
@@ -14,6 +15,8 @@ const Form = ({
 }) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [rating, setRating] = useState<number>(0)
+  const [categories, setCategories] = useState<string[]>([])
+  const [mechanics, setMechanics] = useState<string[]>([])
 
   const handleRatingChange = (e: any) => {
     setRating(e.target.value)
@@ -23,9 +26,17 @@ const Form = ({
     setSearchInput(e.target.value)
   }
 
+  const handleCategoriesChange = (event: SelectChangeEvent<typeof categories>) => {
+    setCategories(typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value)
+  }
+
+  const handleMechanicsChange = (event: SelectChangeEvent<typeof mechanics>) => {
+    setMechanics(typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value)
+  }
+
   useEffect(() => {
     updateSearchedGames(searchInput)
-  }, [searchInput])
+  }, [searchInput, rating])
 
   return (
     <Container
@@ -80,8 +91,8 @@ const Form = ({
               onChange={handleRatingChange}
             />
           </Box>
-          <CheckedDropdown list={categories} name='Categories'/>
-          <CheckedDropdown list={mechanics} name='Mechanics'/>
+          <CheckedDropdown filterState={categories} handleChange={handleCategoriesChange} list={categoriesList} name='Categories'/>
+          <CheckedDropdown filterState={mechanics} handleChange={handleMechanicsChange} list={mechanicsList} name='Mechanics'/>
         </Box>
       </Box>
     </Container>
