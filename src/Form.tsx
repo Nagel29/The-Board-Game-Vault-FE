@@ -4,6 +4,8 @@ import TextField from "@mui/material/TextField"
 import Slider from "@mui/material/Slider"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
+import CheckedDropdown from "./CheckedDropdown"
+import { mechanics, categories } from './utilities/data'
 
 const Form = ({
   updateSearchedGames,
@@ -23,7 +25,7 @@ const Form = ({
 
   useEffect(() => {
     updateSearchedGames(searchInput)
-  },[searchInput])
+  }, [searchInput])
 
   return (
     <Container
@@ -33,9 +35,9 @@ const Form = ({
         position: "fixed",
         left: "0",
         top: "0",
-        width: "100%",
         mt: 10,
       }}
+      maxWidth={false}
     >
       <TextField
         sx={{
@@ -60,20 +62,27 @@ const Form = ({
         }}
         placeholder="Search by name"
         value={searchInput}
-        onChange={(e) => handleSearchInput(e)}
+        onChange={handleSearchInput}
       />
-      <Box sx={{ width: 200 }}>
-        <Typography sx={{ m: "0 0 2em 0" }}>User Rating</Typography>
-        <Slider
-          aria-label="Always visible"
-          value={rating}
-          valueLabelFormat={`${rating} or higher`}
-          step={0.5}
-          valueLabelDisplay="on"
-          min={0}
-          max={5}
-          onChange={(e) => handleRatingChange(e)}
-        />
+      <Box sx={{backgroundColor: ''}}>
+        <Typography sx={{ m: "0 0 .5em 0" }}>Filters</Typography>
+        <Box sx={{ display: "flex", flexDirection: "space-around" }}>
+          <Box sx={{ width: 200 }}>
+            <Typography sx={{ m: "0 0 2em 0" }}>User Rating</Typography>
+            <Slider
+              aria-label="Always visible"
+              value={rating}
+              valueLabelFormat={`${rating} or higher`}
+              step={0.5}
+              valueLabelDisplay="on"
+              min={0}
+              max={5}
+              onChange={handleRatingChange}
+            />
+          </Box>
+          <CheckedDropdown list={categories} name='Categories'/>
+          <CheckedDropdown list={mechanics} name='Mechanics'/>
+        </Box>
       </Box>
     </Container>
   )

@@ -4,11 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Nav from "./Nav"
 import FindGames from './FindGames'
+import { Container } from '@mui/material'
 
 function App() {
 
   return (
-    <div className="App">
+    <div>
       <Nav />
       <FindGames />
     </div>

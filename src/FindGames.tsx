@@ -1,6 +1,7 @@
 import { fetchGames } from "./utilities/apiCalls"
 import { useState } from "react"
 import Form from "./Form"
+import { Container } from "@mui/material"
 
 const FindGames = () => {
   const [foundGames, setFoundGames] = useState()
@@ -13,6 +14,7 @@ const FindGames = () => {
   return (
     <div>
       <Form updateSearchedGames={updateSearchedGames}/>
+
     </div>
   )
 }
