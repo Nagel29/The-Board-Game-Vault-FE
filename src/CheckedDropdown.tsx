@@ -19,11 +19,11 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
   //   },
   // }
 
-  const [filter, setFilter] = useState<string[]>([])
+  const [filterSelections, setFilterSelections] = useState<string[]>([])
 
-  const handleChange = (event: SelectChangeEvent<typeof filter>) => {
+  const handleChange = (event: SelectChangeEvent<typeof filterSelections>) => {
     console.log(event.target)
-    setFilter(
+    setFilterSelections(
       // On autofill we get a stringified value.
       typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value
     )
@@ -37,7 +37,7 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={filter}
+          value={filterSelections}
           onChange={handleChange}
           input={<OutlinedInput label={name} />}
           renderValue={(selected) => selected.join(", ")}
@@ -53,7 +53,7 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
         >
           {list.map((item) => (
             <MenuItem key={item.id} value={item.name}>
-              <Checkbox checked={filter.indexOf(item.name) > -1} />
+              <Checkbox checked={filterSelections.indexOf(item.name) > -1} />
               <ListItemText primary={item.name} />
             </MenuItem>
           ))}
