@@ -8,26 +8,24 @@ import Checkbox from "@mui/material/Checkbox"
 import { useState } from "react"
 
 const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: string}[], name: string}) => {
-  const ITEM_HEIGHT = 48
-  const ITEM_PADDING_TOP = 8
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  }
+  // const ITEM_HEIGHT = 48
+  // const ITEM_PADDING_TOP = 8
+  // const MenuProps = {
+  //   PaperProps: {
+  //     style: {
+  //       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+  //       width: 250,
+  //     },
+  //   },
+  // }
 
   const [filter, setFilter] = useState<string[]>([])
 
   const handleChange = (event: SelectChangeEvent<typeof filter>) => {
-    const {
-      target: { value },
-    } = event
+    console.log(event.target)
     setFilter(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value
     )
   }
 
@@ -41,9 +39,17 @@ const CheckedDropdown = ({list, name}: {list:{id: string, name: string, url: str
           multiple
           value={filter}
           onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
+          input={<OutlinedInput label={name} />}
           renderValue={(selected) => selected.join(", ")}
-          MenuProps={MenuProps}
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: '25em',
+                width: 250,
+              },
+            },
+          }}
+          sx={{ color: 'white'}}
         >
           {list.map((item) => (
             <MenuItem key={item.id} value={item.name}>
