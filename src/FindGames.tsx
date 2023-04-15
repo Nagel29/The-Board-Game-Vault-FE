@@ -6,8 +6,8 @@ import { Container } from "@mui/material"
 const FindGames = () => {
   const [foundGames, setFoundGames] = useState()
 
-  const updateSearchedGames = async (searchInput: string) => {
-    let games = await fetchGames(searchInput)
+  const updateSearchedGames = async (searchInput: string, categories: string[], mechanics: string[]) => {
+    let games = await fetchGames(searchInput, categories, mechanics)
     setFoundGames(games)
   }
   

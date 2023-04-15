@@ -5,18 +5,21 @@ import Slider from "@mui/material/Slider"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import CheckedDropdown from "./CheckedDropdown"
-import { mechanicsList, categoriesList } from './utilities/data'
+import { fetchCategoriesLists, fetchMechanicsLists } from "./utilities/apiCalls"
 import { SelectChangeEvent } from "@mui/material/Select"
+import { FilterLists } from "./utilities/interfaces"
 
 const Form = ({
   updateSearchedGames,
 }: {
-  updateSearchedGames: (searchInput: string) => void
+  updateSearchedGames: (searchInput: string, categories: string[], mechanics: string[]) => void
 }) => {
   const [searchInput, setSearchInput] = useState<string>("")
   const [rating, setRating] = useState<number>(0)
   const [categories, setCategories] = useState<string[]>([])
   const [mechanics, setMechanics] = useState<string[]>([])
+  const [categoriesList, setCategoriesList] = useState<FilterLists[]>([])
+  const [mechanicsList, setMechanicsList] = useState<FilterLists[]>([])
 
   const handleRatingChange = (e: any) => {
     setRating(e.target.value)
@@ -35,8 +38,19 @@ const Form = ({
   }
 
   useEffect(() => {
-    updateSearchedGames(searchInput)
-  }, [searchInput, rating])
+    updateSearchedGames(searchInput, categories, mechanics)
+  }, [searchInput, categories, mechanics])
+
+  const getLists = async () => {
+    let categories = await fetchCategoriesLists()
+    let mechanics = await fetchMechanicsLists()
+    setCategoriesList(categories)
+    setMechanicsList(mechanics)
+  }
+
+  useEffect(() => {
+    getLists()
+  },[])
 
   return (
     <Container
@@ -78,19 +92,6 @@ const Form = ({
       <Box sx={{backgroundColor: ''}}>
         <Typography sx={{ m: "0 0 .5em 0" }}>Filters</Typography>
         <Box sx={{ display: "flex", flexDirection: "space-around" }}>
-          <Box sx={{ width: 200 }}>
-            <Typography sx={{ m: "0 0 2em 0" }}>User Rating</Typography>
-            <Slider
-              aria-label="Always visible"
-              value={rating}
-              valueLabelFormat={`${rating} or higher`}
-              step={0.5}
-              valueLabelDisplay="on"
-              min={0}
-              max={5}
-              onChange={handleRatingChange}
-            />
-          </Box>
           <CheckedDropdown filterState={categories} handleChange={handleCategoriesChange} list={categoriesList} name='Categories'/>
           <CheckedDropdown filterState={mechanics} handleChange={handleMechanicsChange} list={mechanicsList} name='Mechanics'/>
         </Box>

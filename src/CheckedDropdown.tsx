@@ -3,9 +3,8 @@ import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import ListItemText from "@mui/material/ListItemText"
-import Select, { SelectChangeEvent } from "@mui/material/Select"
+import Select from "@mui/material/Select"
 import Checkbox from "@mui/material/Checkbox"
-import { useState } from "react"
 
 const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: string[], list:{id: string, name: string, url: string}[], name: string, handleChange: (event: any) => void}) => {
   // const ITEM_HEIGHT = 48
