@@ -12,29 +12,37 @@ import { FilterLists } from "./utilities/interfaces"
 const Form = ({
   updateSearchedGames,
 }: {
-  updateSearchedGames: (searchInput: string, categories: string[], mechanics: string[]) => void
+  updateSearchedGames: (
+    searchInput: string,
+    categories: FilterLists[],
+    mechanics: FilterLists[]
+  ) => void
 }) => {
   const [searchInput, setSearchInput] = useState<string>("")
-  const [rating, setRating] = useState<number>(0)
-  const [categories, setCategories] = useState<string[]>([])
-  const [mechanics, setMechanics] = useState<string[]>([])
+  const [categories, setCategories] = useState<FilterLists[]>([])
+  const [mechanics, setMechanics] = useState<FilterLists[]>([])
   const [categoriesList, setCategoriesList] = useState<FilterLists[]>([])
   const [mechanicsList, setMechanicsList] = useState<FilterLists[]>([])
-
-  const handleRatingChange = (e: any) => {
-    setRating(e.target.value)
-  }
 
   const handleSearchInput = (e: any) => {
     setSearchInput(e.target.value)
   }
 
-  const handleCategoriesChange = (event: SelectChangeEvent<typeof categories>) => {
-    setCategories(typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value)
+  const handleCategoriesChange = (
+    event: SelectChangeEvent<typeof categories>
+  ) => {
+    if (typeof event.target.value != "string") {
+      console.log(event)
+      setCategories(event.target.value)
+    }
   }
 
-  const handleMechanicsChange = (event: SelectChangeEvent<typeof mechanics>) => {
-    setMechanics(typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value)
+  const handleMechanicsChange = (
+    event: SelectChangeEvent<typeof mechanics>
+  ) => {
+    if (typeof event.target.value != "string") {
+      setMechanics(event.target.value)
+    }
   }
 
   useEffect(() => {
@@ -42,15 +50,15 @@ const Form = ({
   }, [searchInput, categories, mechanics])
 
   const getLists = async () => {
-    let categories = await fetchCategoriesLists()
-    let mechanics = await fetchMechanicsLists()
-    setCategoriesList(categories)
-    setMechanicsList(mechanics)
+    let tempCategoriesList = await fetchCategoriesLists()
+    let tempMechanicsList = await fetchMechanicsLists()
+    setCategoriesList(tempCategoriesList)
+    setMechanicsList(tempMechanicsList)
   }
 
   useEffect(() => {
     getLists()
-  },[])
+  }, [])
 
   return (
     <Container
@@ -89,11 +97,21 @@ const Form = ({
         value={searchInput}
         onChange={handleSearchInput}
       />
-      <Box sx={{backgroundColor: ''}}>
+      <Box sx={{ backgroundColor: "" }}>
         <Typography sx={{ m: "0 0 .5em 0" }}>Filters</Typography>
         <Box sx={{ display: "flex", flexDirection: "space-around" }}>
-          <CheckedDropdown filterState={categories} handleChange={handleCategoriesChange} list={categoriesList} name='Categories'/>
-          <CheckedDropdown filterState={mechanics} handleChange={handleMechanicsChange} list={mechanicsList} name='Mechanics'/>
+          <CheckedDropdown
+            filterState={categories}
+            handleChange={handleCategoriesChange}
+            list={categoriesList}
+            name="Categories"
+          />
+          <CheckedDropdown
+            filterState={mechanics}
+            handleChange={handleMechanicsChange}
+            list={mechanicsList}
+            name="Mechanics"
+          />
         </Box>
       </Box>
     </Container>

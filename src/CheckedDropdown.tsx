@@ -5,8 +5,9 @@ import FormControl from "@mui/material/FormControl"
 import ListItemText from "@mui/material/ListItemText"
 import Select from "@mui/material/Select"
 import Checkbox from "@mui/material/Checkbox"
+import { FilterLists } from "./utilities/interfaces"
 
-const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: string[], list:{id: string, name: string, url: string}[], name: string, handleChange: (event: any) => void}) => {
+const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: FilterLists[], list: FilterLists[], name: string, handleChange: (event: any) => void}) => {
   // const ITEM_HEIGHT = 48
   // const ITEM_PADDING_TOP = 8
   // const MenuProps = {
@@ -39,7 +40,7 @@ const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: 
           value={filterState}
           onChange={handleChange}
           input={<OutlinedInput label={name} />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) => selected.map(filter => filter.name).join(", ")}
           MenuProps={{
             PaperProps: {
               style: {
@@ -51,8 +52,8 @@ const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: 
           sx={{ color: 'white'}}
         >
           {list.map((item) => (
-            <MenuItem key={item.id} value={item.name}>
-              <Checkbox checked={filterState.indexOf(item.name) > -1} />
+            <MenuItem key={item.id} value={item}>
+              <Checkbox checked={filterState.map(filter => filter.name).indexOf(item.name) > -1} />
               <ListItemText primary={item.name} />
             </MenuItem>
           ))}
