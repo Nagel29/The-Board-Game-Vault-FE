@@ -1,11 +1,19 @@
-import { FilterLists } from './interfaces'
+import { FilterLists } from "./interfaces"
 
-export const fetchGames = async (searchInput: string, categories: FilterLists[], mechanics: FilterLists[]) => {
-  const catNames = categories.map(cat => cat.id).join(",")
-  const mechNames = mechanics.map(mech => mech.id).join(",")
+export const fetchGames = async (
+  searchInput: string,
+  categories: FilterLists[],
+  mechanics: FilterLists[]
+) => {
+  const catNames = categories.map((cat) => cat.id).join(",")
+  const mechNames = mechanics.map((mech) => mech.id).join(",")
   try {
     const response = await fetch(
-      `https://api.boardgameatlas.com/api/search?name=${searchInput}&categories=${catNames}&mechanics=${mechNames}&client_id=zuMwyCtcvF`
+      `https://api.boardgameatlas.com/api/search?${
+        searchInput && `&name=${searchInput}`
+      }${catNames && `&categories=${catNames}`}${
+        mechNames && `&mechanics=${mechNames}`
+      }&client_id=zuMwyCtcvF`
     )
     return response.json()
   } catch (error) {
@@ -15,11 +23,10 @@ export const fetchGames = async (searchInput: string, categories: FilterLists[],
 
 export const fetchCategoriesLists = async () => {
   try {
-    const response = await fetch(
-      'http://localhost:8000/categories',{
-      method: 'GET',
+    const response = await fetch("http://localhost:8000/categories", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application.json',
+        "Content-Type": "application.json",
       },
     })
     return response.json()
@@ -30,13 +37,12 @@ export const fetchCategoriesLists = async () => {
 
 export const fetchMechanicsLists = async () => {
   try {
-    const response = await fetch(
-      'http://localhost:8000/mechanics',{
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application.json',
-        },
-      })
+    const response = await fetch("http://localhost:8000/mechanics", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application.json",
+      },
+    })
     return response.json()
   } catch (error) {
     return error
