@@ -1,9 +1,11 @@
 import { FilterLists } from './interfaces'
 
 export const fetchGames = async (searchInput: string, categories: FilterLists[], mechanics: FilterLists[]) => {
+  const catNames = categories.map(cat => cat.id).join(",")
+  const mechNames = mechanics.map(mech => mech.id).join(",")
   try {
     const response = await fetch(
-      `https://api.boardgameatlas.com/api/search?name=${searchInput}&client_id=zuMwyCtcvF`
+      `https://api.boardgameatlas.com/api/search?name=${searchInput}&categories=${catNames}&mechanics=${mechNames}&client_id=zuMwyCtcvF`
     )
     return response.json()
   } catch (error) {
