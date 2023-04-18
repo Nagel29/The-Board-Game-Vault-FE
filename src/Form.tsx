@@ -68,7 +68,10 @@ const Form = ({
         position: "fixed",
         left: "0",
         top: "0",
-        mt: 10,
+        mt: 8,
+        pt: 2,
+        pb: 1,
+        backgroundColor: 'white'
       }}
       maxWidth={false}
     >
@@ -76,20 +79,19 @@ const Form = ({
         sx={{
           input: {
             "&::placeholder": {
-              color: "white",
+              color: "black",
             },
             "&:hover": {
-              border: "white 1px solid",
+              border: "black 1px solid",
               borderRadius: "3px",
               zIndex: 1,
             },
             "&:focus": {
-              border: "white 2px solid",
+              border: "black 2px solid",
               borderRadius: "3px",
               zIndex: 1,
             },
-            color: "white",
-            border: "white 1px solid",
+            color: "black",
             borderRadius: "3px",
           },
         }}

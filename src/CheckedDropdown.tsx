@@ -31,8 +31,8 @@ const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: 
 
   return (
     <div>
-      <FormControl sx={{ ml: 4, width: 300, border: '1px solid white'}}>
-        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: 'white'}}>{name}</InputLabel>
+      <FormControl sx={{ ml: 4, width: 300}}>
+        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: 'black'}}>{name}</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
@@ -49,7 +49,7 @@ const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: 
               },
             },
           }}
-          sx={{ color: 'white'}}
+          sx={{ color: 'black'}}
         >
           {list.map((item) => (
             <MenuItem key={item.id} value={item}>

@@ -15,17 +15,17 @@ const GameSearchList = ({ foundGames }: { foundGames: any }) => {
   const games = foundGames.games.map((game) => {
     return (
       <Grid xs={2} sm={4} md={4} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <GameCard key={game.id} />
+        <GameCard key={game.id} game={game} />
       </Grid>
     )
   })
 
   return (
-    <Box sx={{ flexGrow: 1, mt: 20 }}>
+    <Box sx={{ flexGrow: 1, mt: 20, zIndex: -1 }}>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 1, sm: 8, md: 12 }}
+        columns={{ xs: 1, sm: 12, md: 16 }}
       >
         {games}
       </Grid>
