@@ -3,9 +3,10 @@ import { useState } from "react"
 import Form from "./Form"
 import { Container } from "@mui/material"
 import  { FilterLists } from './utilities/interfaces'
+import GameSearchList from "./GameSearchList"
 
 const FindGames = () => {
-  const [foundGames, setFoundGames] = useState()
+  const [foundGames, setFoundGames] = useState<any>({games: []})
 
   const updateSearchedGames = async (searchInput: string, categories: FilterLists[], mechanics: FilterLists[]) => {
     let games = await fetchGames(searchInput, categories, mechanics)
@@ -15,7 +16,7 @@ const FindGames = () => {
   return (
     <div>
       <Form updateSearchedGames={updateSearchedGames}/>
-
+      <GameSearchList foundGames={foundGames}/>
     </div>
   )
 }

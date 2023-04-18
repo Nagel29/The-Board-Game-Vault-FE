@@ -1,0 +1,36 @@
+import Box from "@mui/material/Box"
+import Grid from "@mui/material/Unstable_Grid2"
+import Grid2 from "@mui/material/Unstable_Grid2"
+import GameCard from "./GameCard"
+
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//   ...theme.typography.body2,
+//   padding: theme.spacing(2),
+//   textAlign: 'center',
+//   color: theme.palette.text.secondary,
+// }));
+
+const GameSearchList = ({ foundGames }: { foundGames: any }) => {
+  const games = foundGames.games.map((game) => {
+    return (
+      <Grid xs={2} sm={4} md={4} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <GameCard key={game.id} />
+      </Grid>
+    )
+  })
+
+  return (
+    <Box sx={{ flexGrow: 1, mt: 20 }}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 1, sm: 8, md: 12 }}
+      >
+        {games}
+      </Grid>
+    </Box>
+  )
+}
+
+export default GameSearchList
