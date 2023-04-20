@@ -16,11 +16,11 @@ import Box from "@mui/material/Box"
 
 const GameCard = ({ game }: { game: any }) => {
   return (
-    <Box my={4} width='90%' height='300px' zIndex={-1}>
-      <Typography variant="h6" paragraph align="center">
+    <Box my={4} width="90%" height="300px">
+      <Card sx={{ position: "relative", height: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Typography variant="h6" paragraph align="center" sx={{backgroundColor: 'rgb(106, 121, 115, .75)', zIndex: 1, color: 'white'}}>
         {game.name}
       </Typography>
-      <Card sx={{ position: "relative", height: '100%' }}>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -33,7 +33,9 @@ const GameCard = ({ game }: { game: any }) => {
             width: "100%",
           }}
         />
-        <CardContent sx={{ position: "relative", backgroundColor: 'transparent' }}>
+        <CardContent
+          sx={{ position: "relative", backgroundColor: "transparent" }}
+        >
           {/* <Typography gutterBottom variant="h5" component="h2">
             Lizard
           </Typography>
@@ -42,6 +44,10 @@ const GameCard = ({ game }: { game: any }) => {
             species, ranging across all continents except Antarctica
           </Typography> */}
         </CardContent>
+        <CardActions sx={{backgroundColor: 'transparent', zIndex: 1}}>
+          <Button size="small" variant='contained'>Share</Button>
+          <Button size="small" variant='contained'>Learn More</Button>
+        </CardActions>
       </Card>
     </Box>
     // <Card sx={{ width: 250, zIndex: -1, backgroundImage: game.images.large }}>

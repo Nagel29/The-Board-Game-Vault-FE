@@ -71,7 +71,8 @@ const Form = ({
         mt: 8,
         pt: 2,
         pb: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        zIndex: 10
       }}
       maxWidth={false}
     >
