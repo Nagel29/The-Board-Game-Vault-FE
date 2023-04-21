@@ -41,7 +41,9 @@ const Nav = () => {
     <AppBar position="fixed">
       <Container maxWidth="xl" disableGutters>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1, ml: 1.5 }} />
+          <AdbIcon
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1, ml: 1.5 }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -59,8 +61,7 @@ const Nav = () => {
           >
             The Board Game Vault
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -109,14 +110,20 @@ const Nav = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               fontSize: "1rem",
-              letterSpacing: { xs: ".1rem", md: '.3rem'},
+              letterSpacing: { xs: ".1rem", md: ".3rem" },
               color: "inherit",
               textDecoration: "none",
             }}
           >
             The Board Game Vault
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end"  }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "flex-end",
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page}
@@ -131,11 +138,11 @@ const Nav = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px"}}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{

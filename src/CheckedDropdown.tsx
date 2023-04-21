@@ -6,8 +6,19 @@ import ListItemText from "@mui/material/ListItemText"
 import Select from "@mui/material/Select"
 import Checkbox from "@mui/material/Checkbox"
 import { FilterLists } from "./utilities/interfaces"
+import Box from "@mui/material/Box"
 
-const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: FilterLists[], list: FilterLists[], name: string, handleChange: (event: any) => void}) => {
+const CheckedDropdown = ({
+  filterState,
+  list,
+  name,
+  handleChange,
+}: {
+  filterState: FilterLists[]
+  list: FilterLists[]
+  name: string
+  handleChange: (event: any) => void
+}) => {
   // const ITEM_HEIGHT = 48
   // const ITEM_PADDING_TOP = 8
   // const MenuProps = {
@@ -30,9 +41,13 @@ const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: 
   // }
 
   return (
-    <div>
-      <FormControl sx={{ ml: 4, width: 300}}>
-        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: 'black'}}>{name}</InputLabel>
+    <Box sx={{ width: { xs: 200, md: 300 } }}>
+      <FormControl
+        sx={{ ml: 4, width: { xs: "90%", md: 275 }, m: { xs: 2, md: 0.5 } }}
+      >
+        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: "black" }}>
+          {name}
+        </InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
@@ -40,26 +55,33 @@ const CheckedDropdown = ({filterState, list, name, handleChange}: {filterState: 
           value={filterState}
           onChange={handleChange}
           input={<OutlinedInput label={name} />}
-          renderValue={(selected) => selected.map(filter => filter.name).join(", ")}
+          renderValue={(selected) =>
+            selected.map((filter) => filter.name).join(", ")
+          }
           MenuProps={{
             PaperProps: {
               style: {
-                maxHeight: '25em',
+                maxHeight: "25em",
                 width: 250,
               },
             },
           }}
-          sx={{ color: 'black'}}
+          sx={{ color: "black", width: { xs: "auto", md: "auto" } }}
         >
           {list.map((item) => (
             <MenuItem key={item.id} value={item}>
-              <Checkbox checked={filterState.map(filter => filter.name).indexOf(item.name) > -1} />
+              <Checkbox
+                checked={
+                  filterState.map((filter) => filter.name).indexOf(item.name) >
+                  -1
+                }
+              />
               <ListItemText primary={item.name} />
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </div>
+    </Box>
   )
 }
 

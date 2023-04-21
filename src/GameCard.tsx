@@ -45,8 +45,8 @@ const GameCard = ({ game }: { game: any }) => {
           </Typography> */}
         </CardContent>
         <CardActions sx={{backgroundColor: 'transparent', zIndex: 1}}>
-          <Button size="small" variant='contained'>Share</Button>
-          <Button size="small" variant='contained'>Learn More</Button>
+          <Button size="small" variant='contained'>Add to Vault</Button>
+          <Button size="small" variant='contained'>Remove from Vault</Button>
         </CardActions>
       </Card>
     </Box>
