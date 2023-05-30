@@ -21,12 +21,32 @@ export const fetchGames = async (
   }
 }
 
+export const loginFetch = async (username: string, password: string) => {
+  try {
+    const response = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+
+      })
+    })
+    return response.json()
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
 export const fetchCategoriesLists = async () => {
   try {
     const response = await fetch("http://localhost:8000/categories", {
       method: "GET",
       headers: {
-        "Content-Type": "application.json",
+        "Content-Type": "application/json",
       },
     })
     return response.json()
@@ -40,7 +60,7 @@ export const fetchMechanicsLists = async () => {
     const response = await fetch("http://localhost:8000/mechanics", {
       method: "GET",
       headers: {
-        "Content-Type": "application.json",
+        "Content-Type": "application/json",
       },
     })
     return response.json()
