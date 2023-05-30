@@ -1,18 +1,10 @@
 import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
 import Button from "@mui/material/Button"
 import Card from "@mui/material/Card"
-import CardActionArea from "@mui/material/CardActionArea"
 import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Box from "@mui/material/Box"
-// import Card from "@mui/material/Card"
-// import CardActions from "@mui/material/CardActions"
-// import CardContent from "@mui/material/CardContent"
-// import CardMedia from "@mui/material/CardMedia"
-// import Button from "@mui/material/Button"
-// import Typography from "@mui/material/Typography"
 
 const GameCard = ({ game }: { game: any }) => {
   return (
@@ -36,13 +28,6 @@ const GameCard = ({ game }: { game: any }) => {
         <CardContent
           sx={{ position: "relative", backgroundColor: "transparent" }}
         >
-          {/* <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography> */}
         </CardContent>
         <CardActions sx={{backgroundColor: 'transparent', zIndex: 1}}>
           <Button size="small" variant='contained'>Add to Vault</Button>
@@ -50,24 +35,6 @@ const GameCard = ({ game }: { game: any }) => {
         </CardActions>
       </Card>
     </Box>
-    // <Card sx={{ width: 250, zIndex: -1, backgroundImage: game.images.large }}>
-    //   <CardMedia
-    //       component="img"
-    //       height="140"
-    //       // sx={{objectFit: 'contain'}}
-    //       // image={game.images.large}
-    //       // alt={`${game.name} box art`}
-    //     />
-    //   <CardContent>
-    //     <Typography gutterBottom variant="h5" component="div">
-    //       {game.name}
-    //     </Typography>
-    //   </CardContent>
-    //   <CardActions>
-    //     <Button size="small">Share</Button>
-    //     <Button size="small">Learn More</Button>
-    //   </CardActions>
-    // </Card>
   )
 }
 

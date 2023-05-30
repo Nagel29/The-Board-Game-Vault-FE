@@ -75,6 +75,7 @@ const Form = ({
         sx={{
           display: { xs: "none", md: "flex" },
           justifyContent: "space-between",
+          alignItems: 'center',
           position: "fixed",
           left: "0",
           top: "0",
@@ -135,7 +136,7 @@ const Form = ({
           position: "fixed",
           left: "0",
           top: "0",
-          mt: 8,
+          mt: 7,
           pt: 2,
           pb: 1,
           backgroundColor: "white",
