@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import Link from "@mui/material/Link"
 
-const Landing = () => {
+const Login = () => {
   return (
     <Container
       sx={{
@@ -25,4 +25,4 @@ const Landing = () => {
   )
 }
 
-export default Landing
+export default Login
