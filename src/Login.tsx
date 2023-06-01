@@ -4,11 +4,14 @@ import Button from "@mui/material/Button"
 import Link from "@mui/material/Link"
 import { loginFetch } from "./utilities/apiCalls"
 import { ChangeEvent, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Login = ({displayUser}: {displayUser: (user: string) => void}) => {
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
+
+  let navigate = useNavigate()
 
   const handleChange = (field: string, e: ChangeEvent) => {
     if (field === "username") {
@@ -28,7 +31,7 @@ const Login = ({displayUser}: {displayUser: (user: string) => void}) => {
       setError(response.error)
       return 
     } else {
-      console.log(username)
+      navigate("/MyVault")
       displayUser(username)
     }
 
