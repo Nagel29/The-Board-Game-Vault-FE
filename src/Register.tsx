@@ -20,7 +20,7 @@ const Register = () => {
      <TextField label="Username" color="primary" focused/>
      <TextField label="Password" color="primary" focused/>
      <Button variant="contained" color="primary">Register</Button>
-     <Link href="/">Already registered? Login here!</Link>
+     <Link href="/">Already registered? Log in here!</Link>
     </Container>
   )
 }

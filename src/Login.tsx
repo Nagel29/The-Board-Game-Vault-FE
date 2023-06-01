@@ -5,7 +5,7 @@ import Link from "@mui/material/Link"
 import { loginFetch } from "./utilities/apiCalls"
 import { ChangeEvent, useState } from "react"
 
-const Login = () => {
+const Login = ({displayUser}: {displayUser: (user: string) => void}) => {
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
@@ -18,11 +18,20 @@ const Login = () => {
     }
   }
 
-  const handleLogin = async (usernameInput: string, passwordInput: string) => {
-    const response = await loginFetch(username, password)
-    if (!response.ok) {
-      setError(response.error) 
+  const handleLogin = async () => {
+    if (!username || !password) {
+      setError('Please input a username & password')
+      return
     }
+    const response = await loginFetch(username, password)
+    if (response.error) {
+      setError(response.error)
+      return 
+    } else {
+      console.log(username)
+      displayUser(username)
+    }
+
   }
 
   return (
@@ -53,8 +62,8 @@ const Login = () => {
         value={password}
         onChange={(e) => handleChange("password", e)}
       />
-      <p>{error ? error : null}</p>
-      <Button variant="contained" color="primary" onClick={() => handleLogin(username, password)}>
+      <p style={{color: 'red'}}>{error ? error : null}</p>
+      <Button variant="contained" color="primary" onClick={() => handleLogin()}>
         Login
       </Button>
       <Link href="/Register">New user? Register here!</Link>

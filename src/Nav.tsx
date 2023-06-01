@@ -7,7 +7,8 @@ import Typography from "@mui/material/Typography"
 import Menu from "@mui/material/Menu"
 import MenuIcon from "@mui/icons-material/Menu"
 import Container from "@mui/material/Container"
-import Avatar from "@mui/material/Avatar"
+import Chip from "@mui/material/Chip"
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
@@ -17,7 +18,7 @@ import { Link } from "react-router-dom"
 const pages = ["Find Games", "My Vault", "My Players"]
 const settings = ["Profile", "Logout"]
 
-const Nav = () => {
+const Nav = ({displayName}: {displayName: string}) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -143,7 +144,19 @@ const Nav = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Chip
+                  icon={<AccountCircleIcon />}
+                  sx={{
+                    backgroundColor: "rgb(36, 36, 36, .8)",
+                    '&:hover': {
+                      backgroundColor: "rgb(36, 36, 36, .5)",
+                      cursor: "pointer"
+                   },
+                    zIndex: 1,
+                    color: "white",
+                  }}
+                  label={displayName}
+                />
               </IconButton>
             </Tooltip>
             <Menu

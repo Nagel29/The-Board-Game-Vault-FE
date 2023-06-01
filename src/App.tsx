@@ -8,14 +8,20 @@ import { Routes, Route } from "react-router-dom"
 import MyVault from "./MyVault"
 
 function App() {
+  const [username, setUsername] = useState<string>("")
+
+  const displayUser = (user: string) => {
+    setUsername(user)
+  }
+
   return (
     <div>
-      <Nav />
+      <Nav displayName={username}/>
       <Routes>
-        <Route path="/" element={<Login />}/>
+        <Route path="/" element={<Login displayUser={displayUser} />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/FindGames" element={<FindGames />}/>
-        <Route path="/MyVault" element={<MyVault />}/>
+        <Route path="/FindGames" element={<FindGames />} />
+        <Route path="/MyVault" element={<MyVault />} />
       </Routes>
     </div>
   )
