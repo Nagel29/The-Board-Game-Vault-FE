@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div>
-      <Nav displayName={username}/>
+      <Nav displayName={username} displayUser={displayUser}/>
       <Routes>
         <Route path="/" element={<Login displayUser={displayUser} />} />
         <Route path="/Register" element={<Register displayUser={displayUser}/>} />
