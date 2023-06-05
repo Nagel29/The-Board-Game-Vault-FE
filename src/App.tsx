@@ -19,7 +19,7 @@ function App() {
       <Nav displayName={username}/>
       <Routes>
         <Route path="/" element={<Login displayUser={displayUser} />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/Register" element={<Register displayUser={displayUser}/>} />
         <Route path="/FindGames" element={<FindGames />} />
         <Route path="/MyVault" element={<MyVault />} />
       </Routes>

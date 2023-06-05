@@ -34,7 +34,6 @@ const Login = ({displayUser}: {displayUser: (user: string) => void}) => {
       navigate("/MyVault")
       displayUser(username)
     }
-
   }
 
   return (
