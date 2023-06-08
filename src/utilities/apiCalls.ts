@@ -1,3 +1,4 @@
+import { useRadioGroup } from "@mui/material"
 import { FilterLists } from "./interfaces"
 
 export const fetchGames = async (
@@ -58,6 +59,24 @@ export const registerFetch = async (username: string, password: string) => {
     return response.json()
   } catch (error) {
     console.log(error)
+    return error
+  }
+}
+
+export const addGameToVault = async (userID: number, gameID: string) => {
+  try {
+    const response = await fetch("http://localhost:8000/addToVault", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userID: userID,
+        gameID: gameID,
+      })
+    })
+    return response.json()
+  } catch (error) {
     return error
   }
 }
