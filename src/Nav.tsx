@@ -19,10 +19,10 @@ const pages = ["Find Games", "My Vault", "My Players"]
 
 const Nav = ({
   displayName,
-  displayUser,
+  updateUser,
 }: {
   displayName: string
-  displayUser: (user: string) => void
+  updateUser: (user: string, id: number) => void
 }) => {
   let navigate = useNavigate()
 
@@ -187,7 +187,7 @@ const Nav = ({
                   <Typography
                     textAlign="center"
                     onClick={() => {
-                      displayUser("")
+                      updateUser("", 0)
                       navigate("/")
                     }}
                   >

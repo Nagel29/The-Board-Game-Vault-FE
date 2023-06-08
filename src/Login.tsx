@@ -6,7 +6,7 @@ import { loginFetch } from "./utilities/apiCalls"
 import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const Login = ({displayUser}: {displayUser: (user: string) => void}) => {
+const Login = ({updateUser}: {updateUser: (user: string, id: number) => void}) => {
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
@@ -32,7 +32,7 @@ const Login = ({displayUser}: {displayUser: (user: string) => void}) => {
       return 
     } else {
       navigate("/MyVault")
-      displayUser(username)
+      updateUser(username, response.id)
     }
   }
 

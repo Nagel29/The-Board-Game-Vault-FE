@@ -6,7 +6,7 @@ import { registerFetch } from "./utilities/apiCalls"
 import { useNavigate } from "react-router-dom"
 import { ChangeEvent, useState } from "react"
 
-const Register = ({displayUser}: {displayUser: (user: string) => void}) => {
+const Register = ({updateUser}: {updateUser: (user: string, id: number) => void}) => {
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
@@ -32,7 +32,7 @@ const Register = ({displayUser}: {displayUser: (user: string) => void}) => {
       return
     } else {
       navigate("/MyVault")
-      displayUser(username)
+      updateUser(username, response.id)
     }
   }
 

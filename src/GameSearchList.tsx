@@ -11,11 +11,22 @@ import GameCard from "./GameCard"
 //   color: theme.palette.text.secondary,
 // }));
 
-const GameSearchList = ({ foundGames }: { foundGames: any }) => {
-  const games = foundGames.games.map((game) => {
+const GameSearchList = ({
+  foundGames,
+  userInfo,
+}: {
+  foundGames: any
+  userInfo: { username: string; userID: number }
+}) => {
+  const games = foundGames.games.map((game: any) => {
     return (
-      <Grid xs={2} sm={4} md={4} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <GameCard key={game.id} game={game} />
+      <Grid
+        xs={2}
+        sm={4}
+        md={4}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <GameCard key={game.id} game={game} userInfo={userInfo} />
       </Grid>
     )
   })
