@@ -18,7 +18,7 @@ const GameSearchList = ({
   foundGames: any
   userInfo: { username: string; userID: number }
 }) => {
-  const games = foundGames.games.map((game) => {
+  const games = foundGames.games.map((game: any) => {
     return (
       <Grid
         xs={2}
