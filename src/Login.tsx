@@ -31,8 +31,8 @@ const Login = ({updateUser}: {updateUser: (user: string, id: number) => void}) =
       setError(response.error)
       return 
     } else {
+      await updateUser(username, response.id)
       navigate("/MyVault")
-      updateUser(username, response.id)
     }
   }
 

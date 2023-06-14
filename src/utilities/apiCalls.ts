@@ -1,4 +1,3 @@
-import { useRadioGroup } from "@mui/material"
 import { FilterLists } from "./interfaces"
 
 export const fetchGames = async (
@@ -27,13 +26,12 @@ export const loginFetch = async (username: string, password: string) => {
     const response = await fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username: username,
         password: password,
-
-      })
+      }),
     })
     return response.json()
   } catch (error) {
@@ -41,20 +39,18 @@ export const loginFetch = async (username: string, password: string) => {
     return error
   }
 }
-
 
 export const registerFetch = async (username: string, password: string) => {
   try {
     const response = await fetch("http://localhost:8000/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username: username,
         password: password,
-
-      })
+      }),
     })
     return response.json()
   } catch (error) {
@@ -63,17 +59,34 @@ export const registerFetch = async (username: string, password: string) => {
   }
 }
 
-export const addGameToVault = async (userID: number, gameID: string) => {
+export const addGameToVault = async (userID: number, game: any) => {
   try {
     const response = await fetch("http://localhost:8000/addToVault", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         userID: userID,
-        gameID: gameID,
-      })
+        game: game,
+      }),
+    })
+    return response.json()
+  } catch (error) {
+    return error
+  }
+}
+
+export const fetchVault = async (userID: number) => {
+  try {
+    const response = await fetch("http://localhost:8000/myVault", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userID: userID,
+      }),
     })
     return response.json()
   } catch (error) {

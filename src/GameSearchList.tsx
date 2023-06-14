@@ -12,13 +12,13 @@ import GameCard from "./GameCard"
 // }));
 
 const GameSearchList = ({
-  foundGames,
+  gamesList,
   userInfo,
 }: {
-  foundGames: any
+  gamesList: any
   userInfo: { username: string; userID: number }
 }) => {
-  const games = foundGames.games.map((game: any) => {
+  const games = gamesList.games.map((game: any) => {
     return (
       <Grid
         xs={2}
