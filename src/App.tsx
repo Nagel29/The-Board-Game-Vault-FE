@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<Login updateUser={updateUser} />} />
         <Route path="/Register" element={<Register updateUser={updateUser}/>} />
         <Route path="/FindGames" element={<FindGames userInfo={{username, userID}}/>} />
-        <Route path="/MyVault" element={<MyVault />} />
+        <Route path="/MyVault" element={<MyVault userInfo={{username, userID}}/>} />
       </Routes>
     </div>
   )

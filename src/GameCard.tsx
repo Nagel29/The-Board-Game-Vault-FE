@@ -56,7 +56,8 @@ const GameCard = ({
           <Button
             size="small"
             variant="contained"
-            onClick={() => addGameToVault(userInfo.userID, game.id)}
+            onClick={() => 
+              addGameToVault(userInfo.userID, game)}
           >
             Add to Vault
           </Button>

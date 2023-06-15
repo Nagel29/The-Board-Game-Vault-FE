@@ -24,7 +24,7 @@ const FindGames = ({
   return (
     <div>
       <Form updateSearchedGames={updateSearchedGames} />
-      <GameSearchList foundGames={foundGames} userInfo={userInfo} />
+      <GameSearchList gamesList={foundGames} userInfo={userInfo} />
     </div>
   )
 }
