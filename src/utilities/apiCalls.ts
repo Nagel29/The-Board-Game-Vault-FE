@@ -59,7 +59,7 @@ export const registerFetch = async (username: string, password: string) => {
   }
 }
 
-export const addGameToVault = async (userID: number, game: any) => {
+export const addGameToVault = async (userID: number, gameID: string, game: any) => {
   try {
     const response = await fetch("http://localhost:8000/addToVault", {
       method: "POST",
@@ -67,8 +67,9 @@ export const addGameToVault = async (userID: number, game: any) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userID: userID,
-        game: game,
+        userID,
+        gameID,
+        game,
       }),
     })
     return response.json()
