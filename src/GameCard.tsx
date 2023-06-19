@@ -14,6 +14,8 @@ const GameCard = ({
   game: any
   userInfo: { username: string; userID: number }
 }) => {
+
+
   return (
     <Box my={4} width="90%" height="300px">
       <Card
@@ -56,8 +58,9 @@ const GameCard = ({
           <Button
             size="small"
             variant="contained"
-            onClick={() => 
-              addGameToVault(userInfo.userID, game)}
+            onClick={async () => {
+              let response = await addGameToVault(userInfo.userID, game.id, game)
+            }}
           >
             Add to Vault
           </Button>
