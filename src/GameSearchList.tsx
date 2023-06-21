@@ -14,9 +14,11 @@ import GameCard from "./GameCard"
 const GameSearchList = ({
   gamesList,
   userInfo,
+  getUpdatedVault,
 }: {
-  gamesList: any
-  userInfo: { username: string; userID: number }
+  gamesList: any,
+  userInfo: { username: string; userID: number },
+  getUpdatedVault: () => void,
 }) => {
   const games = gamesList.games.map((game: any) => {
     return (
@@ -26,7 +28,7 @@ const GameSearchList = ({
         md={4}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        <GameCard key={game.id} game={game} userInfo={userInfo} />
+        <GameCard key={game.id} game={game} userInfo={userInfo} getUpdatedVault={getUpdatedVault}/>
       </Grid>
     )
   })

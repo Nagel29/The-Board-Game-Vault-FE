@@ -78,6 +78,25 @@ export const addGameToVault = async (userID: number, gameID: string, game: any) 
   }
 }
 
+export const removeFromVault = async (userID: number, gameID: string, game: any) => {
+  try {
+    const response = await fetch("http://localhost:8000/removeFromVault", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userID,
+        gameID,
+        game,
+      }),
+    })
+    return response.json()
+  } catch (error) {
+    return error
+  }
+}
+
 export const fetchVault = async (userID: number) => {
   try {
     const response = await fetch("http://localhost:8000/myVault", {
