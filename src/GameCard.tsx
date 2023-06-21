@@ -6,16 +6,17 @@ import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Box from "@mui/material/Box"
 import { addGameToVault } from "./utilities/apiCalls"
+import { removeFromVault } from "./utilities/apiCalls"
 
 const GameCard = ({
   game,
   userInfo,
+  getUpdatedVault,
 }: {
   game: any
   userInfo: { username: string; userID: number }
+  getUpdatedVault: () => void
 }) => {
-
-
   return (
     <Box my={4} width="90%" height="300px">
       <Card
@@ -58,13 +59,18 @@ const GameCard = ({
           <Button
             size="small"
             variant="contained"
-            onClick={async () => {
-              let response = await addGameToVault(userInfo.userID, game.id, game)
-            }}
+            onClick={() => addGameToVault(userInfo.userID, game.id, game)}
           >
             Add to Vault
           </Button>
-          <Button size="small" variant="contained">
+          <Button
+            size="small"
+            variant="contained"
+            onClick={async () => {
+              await removeFromVault(userInfo.userID, game.id, game)
+              getUpdatedVault()
+            }}
+          >
             Remove from Vault
           </Button>
         </CardActions>

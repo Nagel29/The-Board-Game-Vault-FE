@@ -29,7 +29,7 @@ const MyVault = ({
   return (
     <>
       {myGames.games.length > 0 ? (
-        <GameSearchList gamesList={myGames} userInfo={userInfo} />
+        <GameSearchList gamesList={myGames} userInfo={userInfo} getUpdatedVault={getUpdatedVault}/>
       ) : (<div>NO GAMES IN VAULT</div>)}
     </>
   )
