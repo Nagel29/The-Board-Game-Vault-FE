@@ -2,6 +2,7 @@ import { useState } from "react"
 import { fetchVault } from "./utilities/apiCalls"
 import { useEffect } from "react"
 import GameSearchList from "./GameSearchList"
+import { useNavigate } from "react-router-dom"
 
 const MyVault = ({
   userInfo,
@@ -9,6 +10,7 @@ const MyVault = ({
   userInfo: { username: string; userID: number }
 }) => {
   const [myGames, setMyGames] = useState<any>({games: []})
+  const navigate = useNavigate()
 
   const getUpdatedVault = async () => {
     let gamesData = await fetchVault(userInfo.userID)
@@ -23,8 +25,12 @@ const MyVault = ({
   }
 
   useEffect(() => {
+    if (!userInfo.userID) {
+      navigate("/")
+    }
     getUpdatedVault()
   }, [])
+
 
   return (
     <>
