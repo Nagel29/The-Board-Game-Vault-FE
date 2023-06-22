@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom"
 
 const FindGames = ({
   userInfo,
+  updateVaultList,
 }: {
-  userInfo: { username: string; userID: number }
+  userInfo: { username: string; userID: number, vaultList: string[] },
+  updateVaultList: (gameIDs: string[]) => void,
 }) => {
   const [foundGames, setFoundGames] = useState<any>({ games: [] })
   const navigate = useNavigate()
@@ -32,7 +34,7 @@ const FindGames = ({
   return (
     <div>
       <Form updateSearchedGames={updateSearchedGames} />
-      <GameSearchList gamesList={foundGames} userInfo={userInfo} />
+      <GameSearchList gamesList={foundGames} userInfo={userInfo} updateVaultList={updateVaultList} />
     </div>
   )
 }

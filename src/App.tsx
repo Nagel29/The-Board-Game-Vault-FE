@@ -10,10 +10,15 @@ import MyVault from "./MyVault"
 function App() {
   const [username, setUsername] = useState<string>("")
   const [userID, setUserID] = useState<number>(0)
+  const [vaultList, setVaultList] = useState<string[]>([])
 
   const updateUser = (user: string, id: number) => {
     setUsername(user)
     setUserID(id)
+  }
+
+  const updateVaultList = (gameIDs: string[]) => {
+    setVaultList(gameIDs)
   }
 
   return (
@@ -22,8 +27,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login updateUser={updateUser} />} />
         <Route path="/Register" element={<Register updateUser={updateUser}/>} />
-        <Route path="/FindGames" element={<FindGames userInfo={{username, userID}}/>} />
-        <Route path="/MyVault" element={<MyVault userInfo={{username, userID}}/>} />
+        <Route path="/FindGames" element={<FindGames userInfo={{username, userID, vaultList}} updateVaultList={updateVaultList}/>} />
+        <Route path="/MyVault" element={<MyVault userInfo={{username, userID, vaultList}} updateVaultList={updateVaultList}/>} />
       </Routes>
     </div>
   )

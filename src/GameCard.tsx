@@ -7,16 +7,32 @@ import CardMedia from "@mui/material/CardMedia"
 import Box from "@mui/material/Box"
 import { addGameToVault } from "./utilities/apiCalls"
 import { removeFromVault } from "./utilities/apiCalls"
+import { useState, useEffect } from "react"
 
 const GameCard = ({
   game,
   userInfo,
   getUpdatedVault,
+  updateVaultList,
 }: {
   game: any
-  userInfo: { username: string; userID: number }
+  userInfo: { username: string; userID: number; vaultList: string[] }
   getUpdatedVault?: () => void
+  updateVaultList: (gameIDs: string[]) => void
 }) => {
+  const [inVault, setInVault] = useState<boolean>(false)
+  const checkVault = () => {
+    if (userInfo.vaultList.includes(game.id)) {
+      setInVault(true)
+    } else {
+      setInVault(false)
+    }
+  }
+
+  useEffect(() => {
+    checkVault()
+  })
+
   return (
     <Box my={4} width="90%" height="300px">
       <Card
@@ -56,23 +72,40 @@ const GameCard = ({
           sx={{ position: "relative", backgroundColor: "transparent" }}
         ></CardContent>
         <CardActions sx={{ backgroundColor: "transparent", zIndex: 1 }}>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={() => addGameToVault(userInfo.userID, game.id, game)}
-          >
-            Add to Vault
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={async () => {
-              await removeFromVault(userInfo.userID, game.id, game)
-              getUpdatedVault ? getUpdatedVault() : null
-            }}
-          >
-            Remove from Vault
-          </Button>
+          {!inVault ? (
+            <Button
+              size="small"
+              variant="contained"
+              onClick={async () => {
+                let response = await addGameToVault(
+                  userInfo.userID,
+                  game.id,
+                  game
+                )
+                updateVaultList(response.vaultList)
+                getUpdatedVault ? getUpdatedVault() : null
+              }}
+            >
+              Add to Vault
+            </Button>
+          ) : null}
+          {inVault ? (
+            <Button
+              size="small"
+              variant="contained"
+              onClick={async () => {
+                let response = await removeFromVault(
+                  userInfo.userID,
+                  game.id,
+                  game
+                )
+                updateVaultList(response.vaultList)
+                getUpdatedVault ? getUpdatedVault() : null
+              }}
+            >
+              Remove from Vault
+            </Button>
+          ) : null}
         </CardActions>
       </Card>
     </Box>
