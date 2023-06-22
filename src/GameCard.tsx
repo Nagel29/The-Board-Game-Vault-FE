@@ -15,7 +15,7 @@ const GameCard = ({
 }: {
   game: any
   userInfo: { username: string; userID: number }
-  getUpdatedVault: () => void
+  getUpdatedVault?: () => void
 }) => {
   return (
     <Box my={4} width="90%" height="300px">
@@ -68,7 +68,7 @@ const GameCard = ({
             variant="contained"
             onClick={async () => {
               await removeFromVault(userInfo.userID, game.id, game)
-              getUpdatedVault()
+              getUpdatedVault ? getUpdatedVault() : null
             }}
           >
             Remove from Vault

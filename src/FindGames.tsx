@@ -1,9 +1,10 @@
 import { fetchGames } from "./utilities/apiCalls"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Form from "./Form"
 import { Container } from "@mui/material"
 import { FilterLists } from "./utilities/interfaces"
 import GameSearchList from "./GameSearchList"
+import { useNavigate } from "react-router-dom"
 
 const FindGames = ({
   userInfo,
@@ -11,6 +12,7 @@ const FindGames = ({
   userInfo: { username: string; userID: number }
 }) => {
   const [foundGames, setFoundGames] = useState<any>({ games: [] })
+  const navigate = useNavigate()
 
   const updateSearchedGames = async (
     searchInput: string,
@@ -20,6 +22,12 @@ const FindGames = ({
     let games = await fetchGames(searchInput, categories, mechanics)
     setFoundGames(games)
   }
+
+  useEffect(() => {
+    if (!userInfo.userID) {
+      navigate("/")
+    }
+  })
 
   return (
     <div>

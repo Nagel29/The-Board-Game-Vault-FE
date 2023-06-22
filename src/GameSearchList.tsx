@@ -18,7 +18,7 @@ const GameSearchList = ({
 }: {
   gamesList: any,
   userInfo: { username: string; userID: number },
-  getUpdatedVault: () => void,
+  getUpdatedVault?: () => void,
 }) => {
   const games = gamesList.games.map((game: any) => {
     return (
