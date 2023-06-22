@@ -6,15 +6,17 @@ import { useNavigate } from "react-router-dom"
 
 const MyVault = ({
   userInfo,
+  updateVaultList,
 }: {
-  userInfo: { username: string; userID: number }
+  userInfo: { username: string; userID: number; vaultList: string[] }
+  updateVaultList: (gameIDs: string[]) => void
 }) => {
-  const [myGames, setMyGames] = useState<any>({games: []})
+  const [myGames, setMyGames] = useState<any>({ games: [] })
   const navigate = useNavigate()
 
   const getUpdatedVault = async () => {
     let gamesData = await fetchVault(userInfo.userID)
-    let games = gamesData.reduce(
+    let games = gamesData.games.reduce(
       (acc: any, game: any) => {
         acc.games.push(game.games)
         return acc
@@ -22,6 +24,7 @@ const MyVault = ({
       { games: [] }
     )
     setMyGames(games)
+    updateVaultList(gamesData.gameIDs)
   }
 
   useEffect(() => {
@@ -31,12 +34,18 @@ const MyVault = ({
     getUpdatedVault()
   }, [])
 
-
   return (
     <>
       {myGames.games.length > 0 ? (
-        <GameSearchList gamesList={myGames} userInfo={userInfo} getUpdatedVault={getUpdatedVault}/>
-      ) : (<div>NO GAMES IN VAULT</div>)}
+        <GameSearchList
+          gamesList={myGames}
+          userInfo={userInfo}
+          getUpdatedVault={getUpdatedVault}
+          updateVaultList={updateVaultList}
+        />
+      ) : (
+        <div>NO GAMES IN VAULT</div>
+      )}
     </>
   )
 }
