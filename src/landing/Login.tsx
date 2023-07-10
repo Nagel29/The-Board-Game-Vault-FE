@@ -2,11 +2,15 @@ import Container from "@mui/material/Container"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import Link from "@mui/material/Link"
-import { registerFetch } from "./utilities/apiCalls"
-import { useNavigate } from "react-router-dom"
+import { loginFetch } from "../utilities/apiCalls"
 import { ChangeEvent, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-const Register = ({updateUser}: {updateUser: (user: string, id: number) => void}) => {
+const Login = ({
+  updateUser,
+}: {
+  updateUser: (user: string, id: number) => void
+}) => {
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
@@ -21,18 +25,18 @@ const Register = ({updateUser}: {updateUser: (user: string, id: number) => void}
     }
   }
 
-  const handleRegister = async () => {
+  const handleLogin = async () => {
     if (!username || !password) {
       setError("Please input a username & password")
       return
     }
-    const response = await registerFetch(username, password)
+    const response = await loginFetch(username, password)
     if (response.error) {
       setError(response.error)
       return
     } else {
-      navigate("/MyVault")
       updateUser(username, response.id)
+      navigate("/MyVault")
     }
   }
 
@@ -47,18 +51,30 @@ const Register = ({updateUser}: {updateUser: (user: string, id: number) => void}
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
-        padding: '1em'
+        padding: "1em",
       }}
     >
-      <TextField label="Username" color="primary" focused value={username} onChange={(e) => handleChange("username", e)}/>
-      <TextField label="Password" color="primary" focused value={password} onChange={(e) => handleChange("password", e)}/>
-      <p style={{color: 'red'}}>{error ? error : null}</p>
-      <Button variant="contained" color="primary" onClick={() => handleRegister()}>
-        Register
+      <TextField
+        label="Username"
+        color="primary"
+        focused
+        value={username}
+        onChange={(e) => handleChange("username", e)}
+      />
+      <TextField
+        label="Password"
+        color="primary"
+        focused
+        value={password}
+        onChange={(e) => handleChange("password", e)}
+      />
+      <p style={{ color: "red" }}>{error ? error : null}</p>
+      <Button variant="contained" color="primary" onClick={() => handleLogin()}>
+        Login
       </Button>
-      <Link href="/">Already registered? Log in here!</Link>
+      <Link href="/Register">New user? Register here!</Link>
     </Container>
   )
 }
 
-export default Register
+export default Login

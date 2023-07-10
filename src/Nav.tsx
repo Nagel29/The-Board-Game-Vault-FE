@@ -99,9 +99,9 @@ const Nav = ({
                 }}
               >
                 {pages.map((page) => (
-                  <Link to={page.split(" ").join("")}>
+                  <Link key={page} to={page.split(" ").join("")}>
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
+                      <Typography key={page} textAlign="center">{page}</Typography>
                     </MenuItem>
                   </Link>
                 ))}
@@ -135,7 +135,7 @@ const Nav = ({
               }}
             >
               {pages.map((page) => (
-                <Link to={page.split(" ").join("")}>
+                <Link to={page.split(" ").join("")} key={page}>
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}

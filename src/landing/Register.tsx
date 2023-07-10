@@ -2,11 +2,15 @@ import Container from "@mui/material/Container"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import Link from "@mui/material/Link"
-import { loginFetch } from "./utilities/apiCalls"
-import { ChangeEvent, useState } from "react"
+import { registerFetch } from "../utilities/apiCalls"
 import { useNavigate } from "react-router-dom"
+import { ChangeEvent, useState } from "react"
 
-const Login = ({updateUser}: {updateUser: (user: string, id: number) => void}) => {
+const Register = ({
+  updateUser,
+}: {
+  updateUser: (user: string, id: number) => void
+}) => {
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [error, setError] = useState<string>("")
@@ -21,18 +25,18 @@ const Login = ({updateUser}: {updateUser: (user: string, id: number) => void}) =
     }
   }
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (!username || !password) {
-      setError('Please input a username & password')
+      setError("Please input a username & password")
       return
     }
-    const response = await loginFetch(username, password)
+    const response = await registerFetch(username, password)
     if (response.error) {
       setError(response.error)
-      return 
+      return
     } else {
-      updateUser(username, response.id)
       navigate("/MyVault")
+      updateUser(username, response.id)
     }
   }
 
@@ -47,7 +51,7 @@ const Login = ({updateUser}: {updateUser: (user: string, id: number) => void}) =
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
-        padding: '1em'
+        padding: "1em",
       }}
     >
       <TextField
@@ -64,13 +68,17 @@ const Login = ({updateUser}: {updateUser: (user: string, id: number) => void}) =
         value={password}
         onChange={(e) => handleChange("password", e)}
       />
-      <p style={{color: 'red'}}>{error ? error : null}</p>
-      <Button variant="contained" color="primary" onClick={() => handleLogin()}>
-        Login
+      <p style={{ color: "red" }}>{error ? error : null}</p>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleRegister()}
+      >
+        Register
       </Button>
-      <Link href="/Register">New user? Register here!</Link>
+      <Link href="/">Already registered? Log in here!</Link>
     </Container>
   )
 }
 
-export default Login
+export default Register
