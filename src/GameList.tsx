@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Unstable_Grid2"
-import Grid2 from "@mui/material/Unstable_Grid2"
 import GameCard from "./GameCard"
-import { update } from "cypress/types/lodash"
+import { Game } from "./utilities/interfaces"
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -12,24 +11,25 @@ import { update } from "cypress/types/lodash"
 //   color: theme.palette.text.secondary,
 // }));
 
-const GameSearchList = ({
+const GameList = ({
   gamesList,
   userInfo,
   getUpdatedVault,
   updateVaultList,
 }: {
-  gamesList: any,
+  gamesList: Game[],
   userInfo: { username: string; userID: number, vaultList: string[] },
   getUpdatedVault?: () => void,
   updateVaultList: (gameIDs: string[]) => void,
 }) => {
-  const games = gamesList.games.map((game: any) => {
+  const games = gamesList.map((game: Game) => {
     return (
       <Grid
         xs={2}
         sm={4}
         md={4}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        key={`${game.id}-grid`}
       >
         <GameCard key={game.id} game={game} userInfo={userInfo} getUpdatedVault={getUpdatedVault} updateVaultList={updateVaultList} />
       </Grid>
@@ -49,4 +49,4 @@ const GameSearchList = ({
   )
 }
 
-export default GameSearchList
+export default GameList

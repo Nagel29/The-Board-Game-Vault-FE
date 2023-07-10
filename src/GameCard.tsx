@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia"
 import Box from "@mui/material/Box"
 import { addGameToVault } from "./utilities/apiCalls"
 import { removeFromVault } from "./utilities/apiCalls"
+import { Game } from "./utilities/interfaces"
 import { useState, useEffect } from "react"
 
 const GameCard = ({
@@ -15,7 +16,7 @@ const GameCard = ({
   getUpdatedVault,
   updateVaultList,
 }: {
-  game: any
+  game: Game
   userInfo: { username: string; userID: number; vaultList: string[] }
   getUpdatedVault?: () => void
   updateVaultList: (gameIDs: string[]) => void

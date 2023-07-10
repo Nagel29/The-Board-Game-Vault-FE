@@ -2,18 +2,19 @@ import { fetchGames } from "./utilities/apiCalls"
 import { useState, useEffect } from "react"
 import Form from "./Form"
 import { Container } from "@mui/material"
-import { FilterLists } from "./utilities/interfaces"
-import GameSearchList from "./GameSearchList"
+import { FilterLists, Game } from "./utilities/interfaces"
+import { cleanGames } from "./utilities/utilities"
+import GameList from "./GameList"
 import { useNavigate } from "react-router-dom"
 
 const FindGames = ({
   userInfo,
   updateVaultList,
 }: {
-  userInfo: { username: string; userID: number, vaultList: string[] },
-  updateVaultList: (gameIDs: string[]) => void,
+  userInfo: { username: string; userID: number; vaultList: string[] }
+  updateVaultList: (gameIDs: string[]) => void
 }) => {
-  const [foundGames, setFoundGames] = useState<any>({ games: [] })
+  const [foundGames, setFoundGames] = useState<Game[]>([])
   const navigate = useNavigate()
 
   const updateSearchedGames = async (
@@ -22,7 +23,8 @@ const FindGames = ({
     mechanics: FilterLists[]
   ) => {
     let games = await fetchGames(searchInput, categories, mechanics)
-    setFoundGames(games)
+    let cleanedGames = cleanGames(games.games)
+    setFoundGames(cleanedGames)
   }
 
   useEffect(() => {
@@ -34,7 +36,11 @@ const FindGames = ({
   return (
     <div>
       <Form updateSearchedGames={updateSearchedGames} />
-      <GameSearchList gamesList={foundGames} userInfo={userInfo} updateVaultList={updateVaultList} />
+      <GameList
+        gamesList={foundGames}
+        userInfo={userInfo}
+        updateVaultList={updateVaultList}
+      />
     </div>
   )
 }

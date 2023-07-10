@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { fetchVault } from "./utilities/apiCalls"
+import { Game } from "./utilities/interfaces"
 import { useEffect } from "react"
-import GameSearchList from "./GameSearchList"
+import GameList from "./GameList"
 import { useNavigate } from "react-router-dom"
 
 const MyVault = ({
@@ -11,18 +12,15 @@ const MyVault = ({
   userInfo: { username: string; userID: number; vaultList: string[] }
   updateVaultList: (gameIDs: string[]) => void
 }) => {
-  const [myGames, setMyGames] = useState<any>({ games: [] })
+  const [myGames, setMyGames] = useState<Game[]>([])
   const navigate = useNavigate()
 
   const getUpdatedVault = async () => {
     let gamesData = await fetchVault(userInfo.userID)
-    let games = gamesData.games.reduce(
-      (acc: any, game: any) => {
-        acc.games.push(game.games)
-        return acc
-      },
-      { games: [] }
-    )
+    let games = gamesData.vaultGames.reduce((acc: Game[], game: any) => {
+      acc.push(game['game_info'])
+      return acc
+    }, [])
     setMyGames(games)
     updateVaultList(gamesData.gameIDs)
   }
@@ -36,8 +34,8 @@ const MyVault = ({
 
   return (
     <>
-      {myGames.games.length > 0 ? (
-        <GameSearchList
+      {myGames.length > 0 ? (
+        <GameList
           gamesList={myGames}
           userInfo={userInfo}
           getUpdatedVault={getUpdatedVault}
