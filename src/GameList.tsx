@@ -11,7 +11,7 @@ import { Game } from "./utilities/interfaces"
 //   color: theme.palette.text.secondary,
 // }));
 
-const GameSearchList = ({
+const GameList = ({
   gamesList,
   userInfo,
   getUpdatedVault,
@@ -49,4 +49,4 @@ const GameSearchList = ({
   )
 }
 
-export default GameSearchList
+export default GameList

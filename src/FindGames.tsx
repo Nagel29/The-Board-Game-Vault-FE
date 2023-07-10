@@ -3,8 +3,8 @@ import { useState, useEffect } from "react"
 import Form from "./Form"
 import { Container } from "@mui/material"
 import { FilterLists, Game } from "./utilities/interfaces"
-import { cleanGames } from './utilities/utilities'
-import GameSearchList from "./GameSearchList"
+import { cleanGames } from "./utilities/utilities"
+import GameList from "./GameList"
 import { useNavigate } from "react-router-dom"
 
 const FindGames = ({
@@ -36,7 +36,7 @@ const FindGames = ({
   return (
     <div>
       <Form updateSearchedGames={updateSearchedGames} />
-      <GameSearchList
+      <GameList
         gamesList={foundGames}
         userInfo={userInfo}
         updateVaultList={updateVaultList}
