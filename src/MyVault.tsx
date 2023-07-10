@@ -12,7 +12,7 @@ const MyVault = ({
   userInfo: { username: string; userID: number; vaultList: string[] }
   updateVaultList: (gameIDs: string[]) => void
 }) => {
-  const [myGames, setMyGames] = useState<any>({ games: [] })
+  const [myGames, setMyGames] = useState<Game[]>([])
   const navigate = useNavigate()
 
   const getUpdatedVault = async () => {
