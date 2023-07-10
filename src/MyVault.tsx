@@ -17,8 +17,8 @@ const MyVault = ({
 
   const getUpdatedVault = async () => {
     let gamesData = await fetchVault(userInfo.userID)
-    let games = gamesData.games.reduce((acc: Game[], game: any) => {
-      acc.push(game.games)
+    let games = gamesData.vaultGames.reduce((acc: Game[], game: any) => {
+      acc.push(game['game_info'])
       return acc
     }, [])
     setMyGames(games)
